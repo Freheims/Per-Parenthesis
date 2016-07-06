@@ -10,6 +10,7 @@ server = ""
 port =  
 channel = ""
 botname = "Per"
+cmdprefix = ""
 
 def rawSend(data):
     ircsock.send(data + "\r\n")
