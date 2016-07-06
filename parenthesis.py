@@ -28,10 +28,4 @@ def matchParenthesis(string):
     for i in range(curlyBrackets):
         fix += "}"
 
-    print(parenthesis)
-    print(brackets)
-    print(curlyBrackets)
-
     return fix
-
-print(matchParenthesis("hei[{]{{[}((()() :)"))
