@@ -6,19 +6,19 @@ def matchParenthesis(string):
         l = string[i]
         if l == '(':
             parenthesis += 1
-        if l == '[':
+        elif l == '[':
             brackets += 1
-        if l == '{':
+        elif l == '{':
             curlyBrackets += 1
-        if l == ')':
+        elif l == ')':
             if i > 0:
                 if not (string[i-1] == ':' or string[i-1] == ';'):
                     if i > 1:
                         if not string[i-2] == '-':
                             parenthesis -= 1
-        if l == '[':
+        elif l == '[':
             brackets -= 1
-        if l == '{':
+        elif l == '{':
             curlyBrackets -= 1
     fix = ""
     for i in range(parenthesis):
@@ -28,6 +28,10 @@ def matchParenthesis(string):
     for i in range(curlyBrackets):
         fix += "}"
 
+    print(parenthesis)
+    print(brackets)
+    print(curlyBrackets)
+
     return fix
 
-
+print(matchParenthesis("hei[{]{{[}((()() :)"))
