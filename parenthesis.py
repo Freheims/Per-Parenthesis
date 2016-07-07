@@ -16,9 +16,9 @@ def matchParenthesis(string):
                     if i > 1:
                         if not string[i-2] == '-':
                             parenthesis -= 1
-        elif l == '[':
+        elif l == ']':
             brackets -= 1
-        elif l == '{':
+        elif l == '}':
             curlyBrackets -= 1
     fix = ""
     for i in range(parenthesis):
@@ -29,3 +29,4 @@ def matchParenthesis(string):
         fix += "}"
 
     return fix
+
