@@ -5,7 +5,10 @@ def matchParenthesis(string):
     for i in range(len(string)):
         l = string[i]
         if l == '(':
-            if i > 0 and not string[i-1] == ':' and not string[i-1] == ';':
+            if i > 0:
+                if not string[i-1] == ':' and not string[i-1] == ';':
+                    parenthesis += 1
+            else:
                 parenthesis += 1
         elif l == '[':
             brackets += 1
@@ -21,13 +24,28 @@ def matchParenthesis(string):
             brackets -= 1
         elif l == '}':
             curlyBrackets -= 1
+
     fix = ""
-    for i in range(parenthesis):
-        fix += ")"
-    for i in range(brackets):
-        fix += "]"
-    for i in range(curlyBrackets):
-        fix += "}"
+    if parenthesis > 0:
+        for i in range(parenthesis):
+            fix += ")"
+    else:
+        for i in range(parenthesis * -1):
+            fix += "("
+
+    if brackets > 0:
+        for i in range(brackets):
+            fix += "]"
+    else:
+        for i in range(brackets * -1):
+            fix += "["
+
+    if curlyBrackets > 0:
+        for i in range(curlyBrackets):
+            fix += "}"
+    else:
+        for i in range(curlyBrackets * -1):
+            fix += "{"
 
     return fix
 
