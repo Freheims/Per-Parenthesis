@@ -10,7 +10,6 @@ server = ""
 port =  
 channel = ""
 botname = "Per"
-cmdprefix = ""
 
 def rawSend(data):
     ircsock.send(data + "\r\n")
@@ -32,26 +31,22 @@ def parseMessage(message):
     chan = ''
     messageType = ''
     text = ""
-    command = ""
     if not message:
         pass
     if(message[0] == ":"):
         prefix,message = message[1:].split(" ",1)
         sender = prefix.split("!",1)[0]
         messageType, message = message.split(" ", 1)
-        chan, message = message.split(" ", 1)
-        text = message[1:]
-        if(text[0] == cmdprefix):
-            try:
-                command, text = text.split(" ",1)
-            except Exception as e:
-                print(e)
-                command = text
+        try:
+            chan, message = message.split(" ", 1)    
+            text = message[1:]
+        except ValueError as e:
+            chan = message[:1]
+            text = ""
 
     ret = {"sender": sender,
             "messageType": messageType,
             "chan": chan,
-            "command":command,
             "text": text}
     return ret
 
@@ -79,8 +74,9 @@ while 1:
         msg = parseMessage(ircmessage)
         paran = matchParenthesis(msg["text"])
         if not paran == "":
+            reply = msg["sender"] + ": It seems like you forgot something: " + paran
             try:
-                sendMessage(channel, paran)
+                sendMessage(msg["chan"], reply)
             except Exception as e:
                 print(e)
         continue
